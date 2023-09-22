@@ -4,11 +4,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+   call-reusable-workflow:
+   strategy:
+    matrix:
+      nodeversion: [14, 16, 18, 20]
+   uses: ./.github/workflows/reusable-workflow.yml
+   with:
+    node: ${{ matrix.nodeversion }}
+   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+        uses: ./.github/workflows/reusable-workflow.yml
+
+        with:
+          node: 14
 
       - name: Run a multi-line script
         run: |
