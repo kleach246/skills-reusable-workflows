@@ -11,16 +11,15 @@ jobs:
    uses: ./.github/workflows/reusable-workflow.yml
    with:
     node: ${{ matrix.nodeversion }}
-   build:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+     node: 14
+          build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-        uses: ./.github/workflows/reusable-workflow.yml
-
-        with:
-          node: 14
-
+        
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
