@@ -5,16 +5,17 @@ on:
 
 jobs:
    call-reusable-workflow:
-   strategy:
-    matrix:
-      nodeversion: [14, 16, 18, 20]
-   uses: ./.github/workflows/reusable-workflow.yml
-   with:
-    node: ${{ matrix.nodeversion }}
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-     node: 14
-          build:
+     strategy:
+      matrix:
+        nodeversion: [14, 16, 18, 20]
+     uses: ./.github/workflows/reusable-workflow.yml
+     with:
+      node: ${{ matrix.nodeversion }}
+      uses: ./.github/workflows/reusable-workflow.yml
+      with:
+         node: 14
+ 
+   build:
     runs-on: ubuntu-latest
 
     steps:
